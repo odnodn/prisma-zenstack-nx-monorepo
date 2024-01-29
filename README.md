@@ -12,6 +12,8 @@
 
 ## To run the project
 
+Make sure nx is installed globally.
+
 1. npm install
 2. nx run db:generate
 3. nx run db:push
