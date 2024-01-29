@@ -1,0 +1,7 @@
+{
+  "name": "@sample-nx-monorepo/db",
+  "version": "0.0.1",
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+}

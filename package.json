@@ -5,9 +5,12 @@
   "scripts": {},
   "private": true,
   "dependencies": {
+    "@prisma/client": "^5.8.1",
+    "@zenstackhq/runtime": "^1.7.1",
     "axios": "^1.0.0",
     "express": "~4.18.1",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zenstack": "^1.7.1"
   },
   "devDependencies": {
     "@nx/esbuild": "17.2.8",
@@ -31,8 +34,10 @@
     "jest-environment-node": "^29.4.1",
     "nx": "17.2.8",
     "prettier": "^2.6.2",
+    "prisma": "^5.8.1",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
+    "tsx": "^4.7.0",
     "typescript": "~5.2.2"
   }
 }

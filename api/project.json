@@ -1,7 +1,7 @@
 {
-  "name": "sample-nx-monorepo",
+  "name": "api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/sample-nx-monorepo/src",
+  "sourceRoot": "api/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -10,12 +10,12 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/apps/sample-nx-monorepo",
+        "outputPath": "dist/api",
         "format": ["cjs"],
         "bundle": false,
-        "main": "apps/sample-nx-monorepo/src/main.ts",
-        "tsConfig": "apps/sample-nx-monorepo/tsconfig.app.json",
-        "assets": ["apps/sample-nx-monorepo/src/assets"],
+        "main": "api/src/main.ts",
+        "tsConfig": "api/tsconfig.app.json",
+        "assets": ["api/src/assets"],
         "generatePackageJson": true,
         "esbuildOptions": {
           "sourcemap": true,
@@ -40,27 +40,20 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "sample-nx-monorepo:build"
+        "buildTarget": "api:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "sample-nx-monorepo:build:development"
+          "buildTarget": "api:build:development"
         },
         "production": {
-          "buildTarget": "sample-nx-monorepo:build:production"
+          "buildTarget": "api:build:production"
         }
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/sample-nx-monorepo/jest.config.ts"
-      }
     }
   },
   "tags": []
