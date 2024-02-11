@@ -1,0 +1,44 @@
+// base.zmodel
+abstract model Base {
+    id String @id
+    
+    // https://medium.com/@kz-d/multi-tenancy-with-prisma-a-new-approach-to-making-where-required-1e93a3783d9d
+    // https://github.com/kz-d/prisma-where-required
+    // prismaClient.<MODEL>.findMany({where: {tenantId: 1}})
+    // prismaClient.<MODEL>.findMany({where: {tenantId: undefined}})
+    tenantId  String  @unique /// @where-required
+    
+    // https://medium.com/@kz-d/a-new-approach-to-soft-deletion-in-prisma-ffcfa08f3135
+    // prismaClient.<MODEL>.findMany({where: {deletedAt: null}})
+    // write operations: https://www.prisma.io/docs/concepts/components/prisma-client/middleware/soft-delete-middleware
+    deletedAt DateTime? /// @where-required
+    
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // https://github.com/47ng/prisma-field-encryption
+    encrypted String? /// @encrypted
+    author User @relation(fields: [authorId], references: [id])
+    authorId String
+
+    // @@schema("schema")
+    // @@map("tablename")
+
+    // 🔐 allow full CRUD by author
+    @@allow('all', author == auth())
+}
+
+// generator where-required {
+// provider = "prisma-where-required"
+// nodeModulePath = "node_modules"
+//}
+
+// schema.zmodel
+import "base"
+model Post extends Base {
+    title String
+    published Boolean @default(false)
+
+    // 🔐 allow logged-in users to read published posts
+    @@allow('read', auth() != null && published)
+}
